@@ -1,3 +1,8 @@
+import React from 'react'
+import CartWidget from "./CartWidget"
+
+
+
 let linkDecoration = {
     textDecoration: 'none'
 }
@@ -9,9 +14,10 @@ const NavBar = () => {
             <nav>
                 <ul style={{textDecoration:'none', display:'flex', justifyContent:'space-around', listStyleType:'none'}}>
                     <a href="#" style={linkDecoration}><li>Home</li></a>
-                    <a href="#" style={linkDecoration}><li>Shop</li></a>
                     <a href="#" style={linkDecoration}><li>About us</li></a>
                     <a href="#" style={linkDecoration}><li>Contact</li></a>
+                    <a href="#" style={linkDecoration}><li> <CartWidget/> </li></a>
+            
                 </ul>
 
             </nav>
@@ -20,3 +26,4 @@ const NavBar = () => {
 }
 
 export default NavBar
+
