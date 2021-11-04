@@ -7,7 +7,7 @@ const ItemCount = ({initial, stock, onAdd }) => {
     const [count, setCount] = useState(initial)
 
     const handlerAdd =()=>{
-        setCount(count +1)        
+        count < stock ? setCount(count+1) : alert("Superaste el stock de productos :(")      
     }
 
     const handlerRm =()=>{
@@ -15,8 +15,9 @@ const ItemCount = ({initial, stock, onAdd }) => {
     }   
 
     const handlerOnAdd=()=>{
-        onAdd(count)
-        setCount(initial)
+        // onAdd(count)
+        // setCount(initial)
+        if (count >= 1) {alert(`Agregaste ${count} producto(s) al carrito :)`)}
     }
 
     return (
