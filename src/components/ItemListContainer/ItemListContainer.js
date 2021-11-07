@@ -18,7 +18,7 @@ function ItemListContainer({ greetings }) {
         .then(res => {
             setProductos(res) })
         .catch(err => console.log(err))
-        .finally(()=> setLoading=(false))
+        .finally(()=> setLoading(false))
        
     }, [])
 
