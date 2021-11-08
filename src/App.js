@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import { useState, useEffect } from 'react';
 import NavBar from './components/NavBar/NavBar';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -18,11 +19,16 @@ function App() {
 
 
   return (
-    <div className="App">
-        <NavBar />
-        <ItemListContainer greetings="Soy una prop de verdad *pinocho intensifies*" />
-
-    </div>
+    <BrowserRouter>
+      <div className="App">
+          <NavBar />
+          <Routes>
+            <Route exact path='/' element={<ItemListContainer greetings="Soy una prop de verdad *pinocho intensifies*" />}>
+                
+            </Route>
+          </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

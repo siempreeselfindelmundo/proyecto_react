@@ -5,6 +5,7 @@ import ItemCount from '../ItemCount/ItemCount'
 import ItemList from '../ItemList/ItemList'
 import getFetch from '../../services/getFetch'
 import { Spinner } from 'react-bootstrap'
+import ItemDetailContainer from '../ItemDetailContainer/ItemDetailContainer'
 
 
 
@@ -34,6 +35,8 @@ function ItemListContainer({ greetings }) {
             {loading ? <Spinner animation="border" role="status">
                 <span className="visually-hidden">Loading...</span>
             </Spinner> :   <ItemList productos={productos} />}
+
+            <ItemDetailContainer />
           
             
           
