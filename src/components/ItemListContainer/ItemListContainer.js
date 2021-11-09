@@ -31,12 +31,21 @@ function ItemListContainer({ greetings }) {
 
             
             <ItemCount initial={0} stock={5} onAdd={0} />
-
-            {loading ? <Spinner animation="border" role="status">
-                <span className="visually-hidden">Loading...</span>
-            </Spinner> :   <ItemList productos={productos} />}
-
-            <ItemDetailContainer />
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-6">
+                        {loading ? <Spinner animation="border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner> :   <ItemList productos={productos} />  }
+                    </div>
+                    <div className="col-lg-6">
+                    {loading ? <Spinner animation="border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner> :   <ItemDetailContainer productos={productos}/>  }
+                    </div>
+                    
+                </div>
+            </div>
           
             
           
@@ -45,4 +54,3 @@ function ItemListContainer({ greetings }) {
 }
 
 export default ItemListContainer
-

@@ -1,37 +1,15 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import ItemDetail from '../ItemDetail/ItemDetail'
+import getFetch from '../../services/getFetch'
 
-const getItem = new Promise((resolve, reject)=>{
-    const condition = true
-    if (condition){
-        setTimeout(()=>{
-            resolve(productos)
-        }, 2000)
-    } else {
-        setTimeout(()=>{
-            reject('404 not found')
-        }, 2000)
-    } 
-
-})
-
-
-const ItemDetailContainer = () => {
-    const [item, setItem] = useState([])
-
-    useEffect(() => {
-        getItem
-        .then(resolve=>setItem(resolve))
-        .catch(err=>console.log(err))
-        .finally(()=> console.log("loading..."))
-
-        console.log(item)
-    }, [item])
+const ItemDetailContainer = ({productos}) => {
 
     return (
         <div>
-            <ItemDetail key={prod.id} />
+            {productos.map((prod, i)=> 
+                <ItemDetail key={i} prod={prod}/>
+            )}
         </div>
     )
 }

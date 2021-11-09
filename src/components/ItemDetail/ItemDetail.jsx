@@ -1,7 +1,12 @@
 import React from 'react'
 import getFetch from '../../services/getFetch'
 
- const ItemDetail = () => {
+let cardWidth = {
+    width: '18rem'
+}
+
+
+ const ItemDetail = ({prod}) => {
     return (
         <div>
             <div className="container">
@@ -17,7 +22,7 @@ import getFetch from '../../services/getFetch'
                     <p>{prod.title} </p>
                     <p>Medidas: 148x220mms</p>
                     <p>Papel: Couché</p>
-                    <p>Brillo: Mate</p>
+                    <p>Acabado: Mate</p>
                     <p>SKU: {prod.id}</p>
                 </div>
             </div>
