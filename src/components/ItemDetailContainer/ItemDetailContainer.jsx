@@ -7,9 +7,9 @@ const ItemDetailContainer = ({productos}) => {
 
     return (
         <div>
-            {productos.map((prod, i)=> 
-                <ItemDetail key={i} prod={prod}/>
-            )}
+            
+                <ItemDetail prod={productos[0]}/>
+            
         </div>
     )
 }
