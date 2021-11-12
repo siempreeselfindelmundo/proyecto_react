@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 let cardWidth = {
     width: '18rem'
@@ -18,7 +19,9 @@ function Item({prod}) {
                     <p className="mt-5">{prod.price}€</p>
                 </div>
                 <div className="card-footer">
-                    <button className="btn btn-outline-primary btn-block">Más detalles</button>
+                    <Link to={`/details/${prod.id}`}>
+                        <button className="btn btn-outline-primary btn-block">Más detalles</button>
+                    </Link>
                 </div>
             </div>
         </div> 

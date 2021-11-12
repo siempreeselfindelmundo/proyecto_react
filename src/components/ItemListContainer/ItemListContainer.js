@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react'
-import {spinner} from 'bootstrap'
+import { useParams } from 'react-router-dom'
 import ItemCount from '../ItemCount/ItemCount'
 import ItemList from '../ItemList/ItemList'
 import getFetch from '../../services/getFetch'
@@ -14,14 +14,28 @@ function ItemListContainer({ greetings }) {
     const [productos, setProductos] = useState([])
     const [loading, setLoading] = useState(true)
 
+    const {categoryId} = useParams()
+
     useEffect(() => {
-        getFetch
-        .then(res => {
-            setProductos(res) })
-        .catch(err => console.log(err))
-        .finally(()=> setLoading(false))
+        if (categoryId) {
+            getFetch
+            .then(res => {
+                setProductos(res.filter( prod => prod.category === categoryId)) })
+            .catch(err => console.log(err))
+            .finally(()=> setLoading(false)) 
+
+        } else {
+            getFetch
+            .then(res => {
+                setProductos(res) })
+            .catch(err => console.log(err))
+            .finally(()=> setLoading(false)) 
+            }
+
        
-    }, [])
+    }, [categoryId])
+
+    
 
     return (
         <div>
@@ -37,11 +51,6 @@ function ItemListContainer({ greetings }) {
                         {loading ? <Spinner animation="border" role="status">
                             <span className="visually-hidden">Loading...</span>
                         </Spinner> :   <ItemList productos={productos} />  }
-                    </div>
-                    <div className="col-lg-6">
-                    {loading ? <Spinner animation="border" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                        </Spinner> :   <ItemDetailContainer productos={productos}/>  }
                     </div>
                     
                 </div>
