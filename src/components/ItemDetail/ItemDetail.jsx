@@ -5,7 +5,7 @@ let cardWidth = {
     width: '18rem'
 }
 
- const ItemDetail = ( prod ) => {
+ const ItemDetail = ( {prod} ) => {
 
   
     return (
@@ -16,7 +16,7 @@ let cardWidth = {
                     <h3>{`${prod.title}`}</h3>
                 </div>
                 <div className="card-body">
-                    <img src={`prod.pictureUrl`} alt="" />
+                    <img src={`${prod.pictureUrl}`} alt="" />
                     <p className="mt-5">{`${prod.price}`}€</p>
                 </div>
                 <div className="card-footer">
