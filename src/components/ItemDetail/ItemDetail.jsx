@@ -1,5 +1,6 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import ItemCount from '../ItemCount/ItemCount'
 
 let cardWidth = {
     width: '18rem'
@@ -7,6 +8,12 @@ let cardWidth = {
 
  const ItemDetail = ( {prod} ) => {
 
+    const handlerOnAdd = (cantidad) => {
+        console.log(cantidad)
+        setwasClicked(true)
+    }
+
+    const [wasClicked, setwasClicked] = useState(false)
   
     return (
         <div>
@@ -18,6 +25,8 @@ let cardWidth = {
                 <div className="card-body">
                     <img src={`${prod.pictureUrl}`} alt="" />
                     <p className="mt-5">{`${prod.price}`}€</p>
+                    {wasClicked ? <Link to='/cart'>Ir al carro</Link> : <ItemCount initial={0} stock={5} onAdd={handlerOnAdd} />}
+                    
                 </div>
                 <div className="card-footer">
                     <p>{`${prod.title}`} </p>

@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import ItemCount from '../ItemCount/ItemCount'
 import ItemList from '../ItemList/ItemList'
 import getFetch from '../../services/getFetch'
 import { Spinner } from 'react-bootstrap'
@@ -39,12 +38,9 @@ function ItemListContainer({ greetings }) {
 
     return (
         <div>
-            <h1 >Hola soy Item List Container</h1>
+            <h1>Hola soy Item List Container</h1>
             <p>{greetings}</p>
             
-
-            
-            <ItemCount initial={0} stock={5} onAdd={0} />
             <div className="container">
                 <div className="row">
                     <div className="col-lg-6">
@@ -55,9 +51,7 @@ function ItemListContainer({ greetings }) {
                     
                 </div>
             </div>
-          
-            
-          
+
         </div>
     )
 }
