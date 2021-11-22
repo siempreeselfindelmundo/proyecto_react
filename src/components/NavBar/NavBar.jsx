@@ -4,9 +4,13 @@ import { Link } from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
+import { useCartContext } from '../../context/CartContext';
 
 
 const NavBar = () => {
+
+    const { cantidadItem } = useCartContext()
+
     return (
         <Navbar bg='light' expand='lg' >
             <Container fluid>
@@ -23,8 +27,9 @@ const NavBar = () => {
                         <Link to='/category/calido'> Colores Cálidos </Link> 
                         
                     </ Nav>
-                        <Link to='/cart'>
-                            <CartWidget/> 
+                        <Link to='/cart' className="d-flex">
+                            { cantidadItem() !== 0 && cantidadItem()}
+                            <CartWidget /> 
                         </Link>
                 </ Navbar.Collapse>
             </Container>

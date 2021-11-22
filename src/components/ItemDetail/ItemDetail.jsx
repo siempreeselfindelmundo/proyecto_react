@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { CartContext } from '../../context/CartContext'
 import ItemCount from '../ItemCount/ItemCount'
 
 let cardWidth = {
@@ -8,9 +9,15 @@ let cardWidth = {
 
  const ItemDetail = ( {prod} ) => {
 
+    const {cartList, agregarCarrito} = useContext(CartContext)
+
+    console.log(cartList)
+
     const handlerOnAdd = (cantidad) => {
         console.log(cantidad)
         setwasClicked(true)
+        agregarCarrito({ ...prod, cantidad: cantidad })
+        
     }
 
     const [wasClicked, setwasClicked] = useState(false)
@@ -25,7 +32,13 @@ let cardWidth = {
                 <div className="card-body">
                     <img src={`${prod.pictureUrl}`} alt="" />
                     <p className="mt-5">{`${prod.price}`}€</p>
-                    {wasClicked ? <Link to='/cart'>Ir al carro</Link> : <ItemCount initial={0} stock={5} onAdd={handlerOnAdd} />}
+                    {wasClicked ?
+                            <> 
+                            <Link to='/'> <button> Seguir comprando </button></Link> 
+                            <Link to='/cart'> <button> Ir al Check-Out </button></Link> 
+                            </>
+                        : 
+                            <ItemCount initial={0} stock={5} onAdd={handlerOnAdd} />}
                     
                 </div>
                 <div className="card-footer">

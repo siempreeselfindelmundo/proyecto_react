@@ -7,6 +7,8 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import { Cart } from './components/Cart/Cart';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CartContextProvider from './context/CartContext';
+
 
 
 function App() {
@@ -15,17 +17,22 @@ function App() {
     
 
   return (
-    <BrowserRouter>
-      <div className="App">
-          <NavBar />
-          <Routes>
-                <Route exact path='/' element={<ItemListContainer greetings="Soy una prop de verdad *pinocho intensifies*" />}/>
-                <Route exact path='/category/:categoryId' element={<ItemListContainer greetings="Categoría" />}/>
-                <Route exact path='/details/:detailId' element={<ItemDetailContainer />}/> 
-                <Route exact path='/cart' element={<Cart />} />
-          </Routes>
-      </div>
-    </BrowserRouter>
+   <CartContextProvider>
+
+     <BrowserRouter>
+       <div className="App">
+           <NavBar />
+           <Routes>
+                 <Route exact path='/' element={<ItemListContainer greetings="Soy una prop de verdad *pinocho intensifies*" />}/>
+                 <Route exact path='/category/:categoryId' element={<ItemListContainer greetings="Categoría" />}/>
+                 <Route exact path='/details/:detailId' element={<ItemDetailContainer />}/> 
+                 <Route exact path='/cart' element={<Cart />} />
+           </Routes>
+       </div>
+     </BrowserRouter>
+   
+
+   </CartContextProvider>
   );
 }
 
