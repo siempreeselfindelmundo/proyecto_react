@@ -4,20 +4,20 @@ import { CartContext } from '../../context/CartContext'
 import ItemCount from '../ItemCount/ItemCount'
 
 let cardWidth = {
-    width: '18rem'
+    width: '36rem'
 }
 
  const ItemDetail = ( {prod} ) => {
 
     const {cartList, agregarCarrito} = useContext(CartContext)
-
-    console.log(cartList)
+    const [carroVacio, setCarroVacio] = useState(true)
+  
 
     const handlerOnAdd = (cantidad) => {
-        console.log(cantidad)
+        console.log('CANTIDAD: ', cantidad)
         setwasClicked(true)
-        agregarCarrito({ ...prod, cantidad: cantidad })
-        
+        setCarroVacio(false)
+        agregarCarrito({ ...prod, cantidad: cantidad })        
     }
 
     const [wasClicked, setwasClicked] = useState(false)
@@ -25,7 +25,7 @@ let cardWidth = {
     return (
         <div>
             <div className="container">
-            <div className="card w-50 mt-5" key={`${prod.id}`} style={cardWidth}>
+            <div className="card mt-5" key={`${prod.id}`} style={cardWidth}>
                 <div className="card-header">
                     <h3>{`${prod.title}`}</h3>
                 </div>
@@ -34,6 +34,7 @@ let cardWidth = {
                     <p className="mt-5">{`${prod.price}`}€</p>
                     {wasClicked ?
                             <> 
+                            <ItemCount initial={0} stock={5} onAdd={handlerOnAdd} />
                             <Link to='/'> <button> Seguir comprando </button></Link> 
                             <Link to='/cart'> <button> Ir al Check-Out </button></Link> 
                             </>

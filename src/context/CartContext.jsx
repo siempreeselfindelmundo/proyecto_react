@@ -14,46 +14,34 @@ const CartContextProvider = ({children}) => {
 
     const [cartList, setCartList] = useState([])
 
-    const agregarCarrito = (item) => {
+    const agregarCarrito = (prod, cantidad) => {
 
-
-        // CON CANTIDAD PERO SIN SUMAR ITEMS IGUALES
-        const index = cartList.findIndex(i => i.id === item.id) // posición -1
-            console.log(index)
+        if(prod.cantidad != 0){
+        setCartList([...cartList, prod])}
+        console.log('cartList: ', cartList);
+        console.log('prod: ', prod);
         
-            if (index > -1) {
-                const oldQty = cartList[index].cantidad
-                cartList.splice(index, 1)
-                setCartList([...cartList, {...item, cantidad: item.cantidad+oldQty}])
-            }
-            else {
-                setCartList([...cartList, {item: item, cantidad: item.cantidad}])
-                }
-            }
+        // const index = cartList.findIndex(i => i.id === item.id) // posición -1
+        // console.log('ITEM: ', item)
+        // console.log('INDEX ES: ', index);
+        
+        // if (index > -1) {
+        //     const oldQty = cartList[index].cantidad
+        //     console.log('ANTES: ', cartList);
+        //     cartList.splice(index, 1)
+        //     console.log('DESPUES: ', cartList);
+        //     setCartList([...cartList, {...item, cantidad: item.cantidad+oldQty}])
+        // }
+        // else {
+        //     setCartList([...cartList, {item: item, cantidad: item.cantidad}])
+        // }
+    
+    }
 
+    const eliminarItem = (prod, id) => {
 
-            // SIN CANTIDAD 
-    // const agregarCarrito = (item, cantidad) => {
-
-    //     let inCartList = cartList.find((cartItem) => cartItem.id === item.id )
-
-    //     if (inCartList) {
-    //         inCartList.cantidad += cantidad
-    //         setCartList([...cartList])
-    //     }
-    //     else {
-    //         setCartList([...cartList, {...item, cantidad}])
-
-    //     }
-
-    //     console.log(cantidad);
-
-    // }
-
-
-    const eliminarItem = (id) => {
-
-        setCartList(cartList.filter((i) => i.id !== id))
+        setCartList(cartList.filter((prod) => prod.id !== id))
+        console.log("BOTON ELIMINAR: ", cartList);
 
     }
 
@@ -61,8 +49,8 @@ const CartContextProvider = ({children}) => {
         setCartList([])
     }
 
-    const cantidadItem = () => {
-        return cartList.reduce( (acum, item) => acum = acum + item.cantidad , 0 )
+    const cantidadItem = (prod) => {
+       return cartList.reduce( (acum, prod) => acum = acum + prod.cantidad , 0 )
     }
 
     const sumaPrecioItems = () => {
