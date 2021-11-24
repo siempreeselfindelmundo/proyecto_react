@@ -14,35 +14,36 @@ const CartContextProvider = ({children}) => {
 
     const [cartList, setCartList] = useState([])
 
-    const agregarCarrito = (prod, cantidad) => {
+    const agregarCarrito = (item) => {
 
-        if(prod.cantidad != 0){
-        setCartList([...cartList, prod])}
-        console.log('cartList: ', cartList);
-        console.log('prod: ', prod);
+        // if(prod.cantidad != 0){
+        // setCartList([...cartList, prod])}
+        // console.log('cartList: ', cartList);
+        // console.log('prod: ', prod);
         
-        // const index = cartList.findIndex(i => i.id === item.id) // posición -1
-        // console.log('ITEM: ', item)
-        // console.log('INDEX ES: ', index);
+        const index = cartList.findIndex(i => i.id === item.id) // posición -1
+        console.log('ITEM: ', item)
+        console.log('INDEX ES: ', index);
         
-        // if (index > -1) {
-        //     const oldQty = cartList[index].cantidad
-        //     console.log('ANTES: ', cartList);
-        //     cartList.splice(index, 1)
-        //     console.log('DESPUES: ', cartList);
-        //     setCartList([...cartList, {...item, cantidad: item.cantidad+oldQty}])
-        // }
-        // else {
-        //     setCartList([...cartList, {item: item, cantidad: item.cantidad}])
-        // }
+        if (index > -1) {
+            const oldQty = cartList[index].cantidad
+            console.log('ANTES: ', cartList);
+
+            cartList.splice(index, 1)
+            console.log('DESPUES: ', cartList);
+            setCartList([...cartList, {...item, cantidad: item.cantidad+oldQty}])
+        }
+        else {
+            setCartList([...cartList, {...item, cantidad: item.cantidad}])
+        }
     
     }
 
-    const eliminarItem = (prod, id) => {
+    const eliminarItem = (id) => {
 
-        setCartList(cartList.filter((prod) => prod.id !== id))
+        setCartList(cartList.filter((item) => item.id !== id))
         console.log("BOTON ELIMINAR: ", cartList);
-
+        console.log("BOTON ELIMINAR, ITEM: ",);
     }
 
     const limpiarCarro = () => {
