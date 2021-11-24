@@ -13,14 +13,14 @@ export const useCartContext = () => {
 const CartContextProvider = ({children}) => {
 
     const [cartList, setCartList] = useState([])
+    const [carroVacio, setCarroVacio] = useState(true)
 
-    const agregarCarrito = (item) => {
+    const condicionCarroVacio = () => {
+        setCarroVacio(false)
+    }
 
-        // if(prod.cantidad != 0){
-        // setCartList([...cartList, prod])}
-        // console.log('cartList: ', cartList);
-        // console.log('prod: ', prod);
-        
+
+    const agregarCarrito = (item) => {        
         const index = cartList.findIndex(i => i.id === item.id) // posición -1
         console.log('ITEM: ', item)
         console.log('INDEX ES: ', index);
@@ -66,7 +66,8 @@ const CartContextProvider = ({children}) => {
         limpiarCarro,
         eliminarItem, 
         cantidadItem,
-        sumaPrecioItems
+        sumaPrecioItems, 
+        condicionCarroVacio
            }}>
            {children}
        </CartContext.Provider>

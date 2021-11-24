@@ -1,20 +1,16 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCartContext } from '../../context/CartContext'
-import ItemCount from '../ItemCount/ItemCount'
 import NotFound from '../NotFound/NotFound'
 
 
 export const Cart = () => {
 
-    const {cartList, limpiarCarro, eliminarItem} = useCartContext()
+    const {cartList, limpiarCarro, eliminarItem, condicionCarroVacio} = useCartContext()
     const [carroVacio, setCarroVacio] = useState(false)
 
-    const handlerCarroVacio = (carroVacio) => {
-        setCarroVacio(false)
 
-    }
-    
+
     return (
         <div>
             
@@ -54,6 +50,7 @@ export const Cart = () => {
             <button onClick={ limpiarCarro }>Limpiar Carrito</button>
             </>
             }
+
         </div>
             
     )
