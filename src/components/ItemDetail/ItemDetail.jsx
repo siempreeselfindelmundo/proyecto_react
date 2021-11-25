@@ -34,7 +34,7 @@ let cardWidth = {
                     <p className="mt-5">{`${prod.price}`}€</p>
                     {wasClicked ?
                             <> 
-                            <ItemCount initial={1} stock={5} onAdd={handlerOnAdd} />
+                            <ItemCount initial={0} stock={5} onAdd={handlerOnAdd} />
                             <Link to='/'> <button> Seguir comprando </button></Link> 
                             <Link to='/cart'> <button> Ir al Check-Out </button></Link> 
                             </>
