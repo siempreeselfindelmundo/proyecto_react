@@ -8,7 +8,7 @@ const ItemDetailContainer = () => {
 
     const [productos, setProductos] = useState([])
     const [loading, setLoading] = useState(true)
-    const [item, setItem] = useState({})
+    
 
     const {detailId} = useParams()
 
@@ -22,18 +22,7 @@ const ItemDetailContainer = () => {
         .catch(err => console.log(err))
         .finally(() => setLoading(false))
       }
-               
-        // if (detailId) {
-        //     getFetch
-        //       .then((res) => {
-        //         console.log(res)
-        //         setProductos(res.find((prod) => prod.id == detailId));
-        //       })
-        //       .catch((err) => console.log(err))
-        //       .finally(() => setLoading(false)); 
-        // } 
-
-       
+                    
     }, [detailId])
 
 

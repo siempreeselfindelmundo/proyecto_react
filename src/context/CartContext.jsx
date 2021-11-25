@@ -27,10 +27,7 @@ const CartContextProvider = ({children}) => {
         
         if (index > -1) {
             const oldQty = cartList[index].cantidad
-            console.log('ANTES: ', cartList);
-
             cartList.splice(index, 1)
-            console.log('DESPUES: ', cartList);
             setCartList([...cartList, {...item, cantidad: item.cantidad+oldQty}])
         }
         else {
@@ -55,7 +52,7 @@ const CartContextProvider = ({children}) => {
     }
 
     const sumaPrecioItems = () => {
-        return cartList.reduce((acum, item) => acum = acum + item.price, 0)
+        return cartList.reduce((acum, valor) => (acum +(valor.cantidad * valor.price)), 0)
 
     }   
 

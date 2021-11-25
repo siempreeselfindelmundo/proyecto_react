@@ -36,7 +36,7 @@ let cardWidth = {
                             <> 
                             <ItemCount initial={0} stock={5} onAdd={handlerOnAdd} />
                             <Link to='/'> <button> Seguir comprando </button></Link> 
-                            <Link to='/cart'> <button> Ir al Check-Out </button></Link> 
+                            <Link to='/cart'> <button> Ir al Carrito </button></Link> 
                             </>
                         : 
                             <ItemCount initial={1} stock={5} onAdd={handlerOnAdd} />}
