@@ -5,6 +5,10 @@
 
 "Postales" es una serie de fotografías de medio formato de originales arreglos florales instalados en el paisaje urbano de Santiago de Chile. Éste es el E-Commerce para venderlas en formato de postal.
 
+
+>Nos asociamos con la florista y fotógrafa A.M. para crear una serie de postales originales y creativas. Con su gran sentido de la imaginación y su exquisita capacidad de composición, empezamos a revelar sus fotografías de una forma nueva.
+
+
 ## Qué puedo hacer:
 
 - Ver el catálogo de postales disponibles.
@@ -12,9 +16,6 @@
 - Ver detalles de cada producto.
 - Agregar productos al carro.
 - Generar una orden de compra.
-
-
->Nos asociamos con la florista y fotógrafa A.M. para crear una serie de postales originales y creativas. Con su gran sentido de la imaginación y su exquisita capacidad de composición, empezamos a revelar sus fotografías de una forma nueva.
 
 
 ## Dependencias utilizadas
