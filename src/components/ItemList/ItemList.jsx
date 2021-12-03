@@ -1,5 +1,4 @@
 import React from 'react'
-import getFetch from '../../services/getFetch'
 import Item from '../Item/Item'
 
  const ItemList = ({productos}) => {

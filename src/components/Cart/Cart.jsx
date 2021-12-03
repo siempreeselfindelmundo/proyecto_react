@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
 import { useCartContext } from '../../context/CartContext'
 import { getFirestore } from '../../services/getFirestore'
-import NotFound from '../NotFound/NotFound'
-import firebase from "firebase"
 import 'firebase/firestore'
+import firebase from "firebase"
+
+import NotFound from '../NotFound/NotFound'
+import Form from '../Form/Form'
+
 
 export const Cart = () => {
 
-    const {cartList, limpiarCarro, eliminarItem, condicionCarroVacio, sumaPrecioItems} = useCartContext()
+    const {cartList, limpiarCarro, eliminarItem,  sumaPrecioItems} = useCartContext()
    
     // GENERAR ORDEN DE COMPRA
     const generarOrden = (e) => {
@@ -29,76 +31,46 @@ export const Cart = () => {
         // CONEXION A FIREBASE, GENERA ORDEN Y NUEVA COLECCIÓN
         const dbQuery = getFirestore()
         dbQuery.collection('orders').add(ordenCompra)
-        .then(resp => console.log('RESPUESTA ORDEN COMPRA: ', resp))
+        .then(resp => alert(`Genial! Tu orden de compra es: ${resp.id}`))
         .catch(err => console.log('ERROR ORDEN COMPRA: ', err))
         .finally()
-
-        // ACTUALIZA STOCK DESPUÉS DE CADA COMPRA
-        // const itemsToUpdate = dbQuery.collection('productos').where(
-        //     firebase.firestore.Fieldpath.documentId() , 'in', cartList.map(i => i.id)
-        // )
-        // const batch = dbQuery.batch()
-         
-        // //POR CADA ITEM RESTAR LA CANTIDAD DEL CARRITO EN STOCK
-        // itemsToUpdate.get()
-        // .then(collection=> {
-        //     collection.docs.forEach(docSnapshot => {
-        //         batch.update(docSnapshot.ref, {
-        //             stock: docSnapshot.data().stock - cartList.find(
-        //                 item => item.id === docSnapshot.id).cantidad
-        //         })
-        //     })
-        //     batch.commit().then(res => {
-        //         console.log('STOCK ACTUALIZADO')
-        //     })
-        
-        // })
     }
-
-
-
-
+    
     return (
         <div>
             { !cartList.length > 0 ?
                 <>
-                <Link to='/'>
                     <NotFound />
-                    Ir al Home</Link>
-                </>  
-                
+                </>    
                 :
-                
             <>
-            <h3>Cart</h3>
-            <table>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio unidad</th>
-                    <th>Subtotal</th>
-                    <th>Eliminar</th>
-                </tr>
+            <h3 className="text-3xl py-8">Carrito</h3>
             
             {cartList.map(prod => 
-                <tr key={prod.id}>
-                    <th>{prod.title}
-                        {/* <img src={prod.pictureUrl} alt="product_picture" />  */}
-                    </th>
-                    <th>{prod.cantidad}</th>
-                    <th>{prod.price}</th>
-                    <th>{prod.price * prod.cantidad}</th>
-                    <th><button className="btn btn-secondary btn-danger btn-sm" key={prod.id} onClick={()=> eliminarItem(prod.id) }>x</button> </th>
-                </tr>
+                <div key={prod.id} className="flex justify-center items-center py-4 px-2 border-2">
+                    <img src={prod.pictureUrl} className="rounded h-32 mx-6" alt=""/>
+                    <div className="mx-6">
+                        <h4 className="text-lg">{prod.title}</h4>
+                        <div className="flex flex-col items-start">
+                            <p>Cantidad: {prod.cantidad}</p>
+                            <p>Precio unitario: {prod.price}€</p>
+                            <p>Subtotal: {prod.price * prod.cantidad}€</p>
+                        </div>
+                    </div>
+                    <button className="bg-red-700 text-white p-2 rounded mx-6 " key={prod.id} onClick={()=> eliminarItem(prod.id) }>
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    </button>
+                </div>
             )}
-            </table>            
-            <h4>Total: { sumaPrecioItems()}</h4>
-            <button onClick={ generarOrden }>Check-Out</button>
-            <button onClick={ limpiarCarro }>Limpiar Carrito</button>
+                     
+            <h4 className="text-2xl font-bold py-8">Total: {sumaPrecioItems()}€</h4>
+            <div className="py-20">
+                <button onClick={ generarOrden } className="border-2 border-black px-5 py-2 rounded bg-black text-white hover:bg-white hover:text-black mr-2 shadow">Check-Out</button>
+                <button onClick={ limpiarCarro } className="border-2 border-black px-5 py-2 rounded hover:bg-black hover:text-white ml-2 shadow">Limpiar Carrito</button>
+            </div>
             </>
             }
-
+            <Form/>
         </div>
-            
     )
 }

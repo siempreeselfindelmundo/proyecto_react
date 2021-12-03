@@ -1,6 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
-import { Cart } from "../components/Cart/Cart";
-
+import React, { createContext, useState, useContext } from "react"
 
 export const CartContext = createContext([])
 
@@ -8,23 +6,11 @@ export const useCartContext = () => {
     return useContext(CartContext)
 }
 
-
-
 const CartContextProvider = ({children}) => {
-
     const [cartList, setCartList] = useState([])
-    const [carroVacio, setCarroVacio] = useState(true)
-
-    const condicionCarroVacio = () => {
-        setCarroVacio(false)
-    }
-
-
+   
     const agregarCarrito = (item) => {        
-        const index = cartList.findIndex(i => i.id === item.id) // posición -1
-        console.log('ITEM: ', item)
-        console.log('INDEX ES: ', index);
-        
+        const index = cartList.findIndex(i => i.id === item.id) // posición -1   
         if (index > -1) {
             const oldQty = cartList[index].cantidad
             cartList.splice(index, 1)
@@ -33,14 +19,10 @@ const CartContextProvider = ({children}) => {
         else {
             setCartList([...cartList, {...item, cantidad: item.cantidad}])
         }
-    
     }
 
     const eliminarItem = (id) => {
-
         setCartList(cartList.filter((item) => item.id !== id))
-        console.log("BOTON ELIMINAR: ", cartList);
-        console.log("BOTON ELIMINAR, ITEM: ",);
     }
 
     const limpiarCarro = () => {
@@ -53,7 +35,6 @@ const CartContextProvider = ({children}) => {
 
     const sumaPrecioItems = () => {
         return cartList.reduce((acum, valor) => (acum +(valor.cantidad * valor.price)), 0)
-
     }   
 
     return (
@@ -63,12 +44,11 @@ const CartContextProvider = ({children}) => {
         limpiarCarro,
         eliminarItem, 
         cantidadItem,
-        sumaPrecioItems, 
-        condicionCarroVacio
+        sumaPrecioItems
            }}>
            {children}
        </CartContext.Provider>
     )
-        }
+}
 
 export default CartContextProvider

@@ -3,20 +3,14 @@ import { Link } from 'react-router-dom'
 import { CartContext } from '../../context/CartContext'
 import ItemCount from '../ItemCount/ItemCount'
 
-let cardWidth = {
-    width: '36rem'
-}
 
  const ItemDetail = ( {prod} ) => {
 
-    const {cartList, agregarCarrito} = useContext(CartContext)
-    const [carroVacio, setCarroVacio] = useState(true)
-  
+    const {agregarCarrito} = useContext(CartContext)
 
     const handlerOnAdd = (cantidad) => {
         console.log('CANTIDAD: ', cantidad)
         setwasClicked(true)
-        setCarroVacio(false)
         agregarCarrito({ ...prod, cantidad: cantidad })        
     }
 
@@ -24,34 +18,29 @@ let cardWidth = {
   
     return (
         <div>
-            <div className="container">
-            <div className="card mt-5" key={`${prod.id}`} style={cardWidth}>
-                <div className="card-header">
-                    <h3>{`${prod.title}`}</h3>
-                </div>
-                <div className="card-body">
-                    <img src={`${prod.pictureUrl}`} alt="" />
-                    <p className="mt-5">{`${prod.price}`}€</p>
-                    {wasClicked ?
-                            <> 
-                            <ItemCount initial={0} stock={5} onAdd={handlerOnAdd} />
-                            <Link to='/'> <button> Seguir comprando </button></Link> 
-                            <Link to='/cart'> <button> Ir al Carrito </button></Link> 
-                            </>
-                        : 
-                            <ItemCount initial={1} stock={5} onAdd={handlerOnAdd} />}
-                    
-                </div>
-                <div className="card-footer">
-                    <p>{`${prod.title}`} </p>
+            <div className="flex flex-col justify-center items-center py-12" key={`${prod.id}`}> 
+                <img src={`${prod.pictureUrl}`} className="rounded mb-12 shadow-md" alt="" />
+                <h3 className="text-2xl">{`${prod.title}`}</h3>
+                <p className="text-xl">{`${prod.price}`}€</p>
+                <div className="flex flex-col items-start py-4 text-gray-600">
                     <p>Medidas: 148x220mms</p>
                     <p>Papel: Couché</p>
                     <p>Acabado: Mate</p>
                     <p>SKU: {`${prod.id}`}</p>
                 </div>
-            </div>
-        </div> 
 
+                {wasClicked ?
+                    <> 
+                        <ItemCount initial={0} stock={5} onAdd={handlerOnAdd} />
+                        <div className="flex my-5">
+                            <Link to='/productos'> <button className="border-2 border-black px-2 py-1 rounded hover:bg-black hover:text-white mr-2 shadow"> Seguir comprando </button></Link> 
+                            <Link to='/cart'> <button className="border-2 border-black px-2 py-1 rounded bg-black text-white hover:bg-white hover:text-black ml-2 shadow"> Ir al Carrito </button></Link> 
+                        </div>
+                    </>
+                    : 
+                    <ItemCount initial={1} stock={5} onAdd={handlerOnAdd} />
+                }
+            </div>
         </div>
     )
 }
