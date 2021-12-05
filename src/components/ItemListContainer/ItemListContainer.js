@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getFirestore } from '../../services/getFirestore'
 import ItemList from '../ItemList/ItemList'
-import { Spinner } from 'react-bootstrap'
+
 
 
 
@@ -30,9 +30,7 @@ function ItemListContainer({ greetings }) {
             <h1 className="text-black text-4xl p-8">Postales</h1>
             <p className="p-8">{greetings}</p>
             {loading ? 
-            <Spinner animation="border" role="status">
-                <span className="visually-hidden">Loading...</span>
-            </Spinner> 
+            <h3>Cargando...</h3>
             :   
             <ItemList productos={productos} />  
             }

@@ -17,8 +17,8 @@ const ItemDetailContainer = () => {
         .then(resp => setProductos( { id: resp.id, ...resp.data() } ))  // Capturar respuesta, en setItem extraigo un objeto, y guardo el id dentro del objeto. además agrego todos los otros datos
         .catch(err => console.log(err))
         .finally(() => setLoading(false))
+        // eslint-disable-next-line
       }
-                    
     }, [detailId])
     
     return (
