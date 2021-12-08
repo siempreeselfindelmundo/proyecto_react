@@ -37,17 +37,17 @@ const Checkout = () => {
         .finally()
         
     }
+    
 
-    const handlerModal = () => {
-        setShowModal(!showModal)
-        console.log('MODAL: ', showModal);
-    }
+    
+
 
     return (
         <div className="flex flex-col justify-center items-center ">
             <h2 className="text-3xl font-bold py-8">Completa tus datos</h2>
             <p className="pb-4">Para poder confirmar la compra, ingresa tus datos:</p>
             <form 
+            onSubmit={generarOrden}
             className="flex flex-col items-start justify-center"
             >
                 <div className="my-1 flex flex-col items-start">
@@ -91,13 +91,18 @@ const Checkout = () => {
                         <button className="border-2 border-black px-5 py-2 rounded hover:bg-black hover:text-white mr-2 shadow"> ← Atrás</button>
                     </Link>
                     <button 
-                        onClick={generarOrden, handlerModal} 
+                        type="submit"
+                        onClick={() => setShowModal(true)}
                         className="border-2 border-black px-5 py-2 rounded bg-black text-white hover:bg-white hover:text-black ml-2 shadow">Confirmar compra</button>
                 </div>
             </form>
-            {showModal && <Modal closeModal={setShowModal}/>}
+
+            <Modal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            generarOrden={generarOrden}/>
+    
         </div>
     )
 }
-
 export default Checkout
