@@ -1,7 +1,7 @@
 # A.M. Florist
 ## _Postales_
 
-[︎🔗 VER DEMO] Link al deploy)
+[︎🔗 VER DEMO](https://unruffled-hermann-20d922.netlify.app/)
 
 "Postales" es una serie de fotografías de medio formato de originales arreglos florales instalados en el paisaje urbano de Santiago de Chile. Éste es el E-Commerce para venderlas en formato de postal.
 
