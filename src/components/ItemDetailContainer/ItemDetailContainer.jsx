@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getFirestore } from '../../services/getFirestore'
 import ItemDetail from '../ItemDetail/ItemDetail'
+import Spinner from '../Spinner/Spinner'
 
 const ItemDetailContainer = () => {
 
@@ -22,8 +23,13 @@ const ItemDetailContainer = () => {
     }, [detailId])
     
     return (
-      <div>
+      <div className="flex flex-col items-center">
+        { loading 
+        ? 
+        <Spinner />
+        :
         <ItemDetail prod={productos}/>
+        }
       </div>
     )
 }

@@ -1,3 +1,155 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-primary {
+    @apply py-2 px-4 bg-black text-white border border-black rounded text-lg hover:bg-white hover:text-black transition ease-in-out flex items-center transform hover:-translate-y-0.5 shadow
+}
+
+.btn-secondary {
+    @apply py-2 px-4 bg-white text-black border border-black rounded text-lg hover:bg-black hover:text-white transition ease-in-out flex items-center transform hover:-translate-y-0.5 shadow
+}
+
+.btn-delete {
+    @apply bg-red-700 text-white p-2 rounded mx-6
+}
+
+.title {
+    @apply text-black text-4xl p-8
+}
+
+.hero-container {
+    @apply bg-white h-screen flex flex-col justify-center items-center
+}
+
+.hero-text{
+    @apply md:text-5xl text-3xl font-black mb-14
+}
+
+.item-count{
+    @apply flex justify-center items-center my-5
+}
+
+.item-count-add{
+    @apply bg-black text-white border-2 border-black rounded-full hover:bg-white hover:text-black
+}
+
+.item-count-rm{
+    @apply bg-white border-2 border-black rounded-full hover:bg-black hover:text-white
+}
+
+.item-count-container{
+    @apply flex flex-col items-center
+}
+
+.item-list{
+    @apply lg:grid lg:grid-cols-3 lg:gap-4 lg:px-4
+}
+
+.item-list-container{
+    @apply flex flex-col items-center
+}
+
+.item-container{
+    @apply flex flex-col justify-center items-center py-12
+}
+
+.item-img{
+    @apply rounded mb-12 shadow-md
+}
+
+.item-detail-container{
+    @apply flex flex-col justify-center items-center pt-6 pb-12 lg:flex lg:flex-row
+}
+
+.item-detail-container-text{
+    @apply flex flex-col justify-center items-center lg:pl-12
+}
+
+.details-text{
+    @apply flex flex-col items-start py-4 text-gray-600
+}
+
+.cart-item-container {
+    @apply flex justify-center items-center py-4 px-2
+}
+
+.checkout-container {
+    @apply flex flex-col justify-center items-center h-screen p-3
+}
+
+.form-container {
+    @apply flex flex-col items-center justify-center
+}
+
+.form-field {
+    @apply my-1 flex flex-col items-start px-3
+}
+
+.form-input {
+    @apply border-2 rounded px-4 w-screen lg:w-96 h-9
+}
+
+.form-label {
+    @apply text-lg mr-2
+}
+
+.form-btn-container {
+    @apply flex items-center justify-center py-8
+}
+
+.footer-container {
+    @apply flex justify-center bg-black text-white font-extralight text-xs py-3
+}
+
+.modal-container {
+    @apply w-screen h-screen bg-black fixed flex justify-center items-center bg-opacity-75
+}
+
+.modal-body {
+    @apply rounded bg-white shadow-md flex flex-col p-12
+}
+
+.dropdown-open {
+    @apply grid grid-rows-3 text-center items-center
+}
+
+.navbar-container {
+    @apply flex justify-between items-center h-16 bg-white text-black relative shadow-sm
+}
+
+.burger-menu {
+    @apply px-4 cursor-pointer md:hidden
+}
+
+.main-title {
+    @apply px-4 font-bold text-2xl
+}
+
+.nav {
+    @apply pr-8 md:block hidden
+}
+
+.navlink-active {
+    @apply border-b-4 border-black p-4
+}
+
+.cart-link {
+    @apply px-4 flex items-center
+}
+
+.notfound-container {
+    @apply flex flex-col justify-center items-center h-screen
+}
+
+.notfound-text {
+    @apply text-4xl text-center
+}
+
+.spinner-container {
+    @apply h-screen flex items-center py-8
+}
+
+.spinner {
+    @apply animate-spin border-b-8 border-t-8 border-black rounded-full  h-16 w-16
+}

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getFirestore } from '../../services/getFirestore'
 import ItemList from '../ItemList/ItemList'
+import Spinner from '../Spinner/Spinner'
 
 
 
@@ -26,11 +27,12 @@ function ItemListContainer({ greetings }) {
     
 
     return (
-        <div>
-            <h1 className="text-black text-4xl p-8">Postales</h1>
+        <div className="item-list-container">
+            <h1 className="title">Postales</h1>
             <p className="p-8">{greetings}</p>
             {loading ? 
-            <h3>Cargando...</h3>
+            
+            <Spinner/>
             :   
             <ItemList productos={productos} />  
             }

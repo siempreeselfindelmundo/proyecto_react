@@ -1,18 +1,20 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
 import { useCartContext } from '../../context/CartContext'
 import { getFirestore } from '../../services/getFirestore'
 import 'firebase/firestore'
 import firebase from "firebase"
 import Modal from '../Modal/Modal'
+import Form from './Form'
 
 const Checkout = () => {
+    const [orderID, setOrderID] = useState(null)
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [emailValid, setEmailValid] = useState('')
     const [showModal, setShowModal] = useState(false)
     const {cartList, sumaPrecioItems} = useCartContext()
+    
 
     const generarOrden = (e) => {
         e.preventDefault()
@@ -28,80 +30,66 @@ const Checkout = () => {
             const date = firebase.firestore.Timestamp.fromDate(new Date())
             return {id, title, price, date}
         })
-        console.log('ORDEN DE COMPRA: ', ordenCompra)
+        
         // CONEXION A FIREBASE, GENERA ORDEN Y NUEVA COLECCIÓN
         const dbQuery = getFirestore()
         dbQuery.collection('orders').add(ordenCompra)
-        .then(resp => console.log(`Genial! Tu orden de compra es: ${resp.id}`))
+        .then(resp => setOrderID(resp.id))
         .catch(err => console.log('ERROR ORDEN COMPRA: ', err))
         .finally()
-        
-    }
-    
 
+        // SE ACTUALIZA STOCK 
+        const itemsToUpdate = dbQuery.collection('productos').where(
+            firebase.firestore.FieldPath.documentId() , 'in', cartList.map(i=> i.id)
+        )
+        const batch = dbQuery.batch()
+        itemsToUpdate.get()
+
+        .then( collection=>{
+            collection.docs.forEach(docSnapshot => {
+                batch.update(docSnapshot.ref, {
+                    stock: docSnapshot.data().stock - cartList.find(item => item.id === docSnapshot.id).cantidad
+                })
+            })
     
+            batch.commit().then(res =>{
+                console.log('STOCK ACTUALIZADO', res)
+            })
+        })
+
+    }       
+    
+    const notValid = 
+        !(name.length &&
+        email.length &&
+        phone.length &&
+        emailValid.length > 0 &&
+        email === emailValid
+        )
 
 
     return (
-        <div className="flex flex-col justify-center items-center ">
-            <h2 className="text-3xl font-bold py-8">Completa tus datos</h2>
+        <div className="checkout-container">
+            <h2 className="title">Completa tus datos</h2>
             <p className="pb-4">Para poder confirmar la compra, ingresa tus datos:</p>
-            <form 
-            onSubmit={generarOrden}
-            className="flex flex-col items-start justify-center"
-            >
-                <div className="my-1 flex flex-col items-start">
-                    <label className="text-lg mr-2 " htmlFor="nombreBuyer">Nombre<span className="text-red-500">*</span></label>
-                    <input required
-                        value={name}
-                        onChange={(e)=>setName(e.target.value)}
-                        className="border-2 rounded px-4" 
-                        type="text"
-                        placeholder="Nombre completo"/>
-                </div>
-                <div className="my-1 flex flex-col items-start">
-                    <label className="text-lg mr-2" htmlFor="email">Email<span className="text-red-500">*</span></label>
-                    <input required
-                        value={email}
-                        onChange={(e)=>setEmail(e.target.value)}
-                        className="border-2 rounded px-4" 
-                        type="email" 
-                        placeholder="Email"/>
-                </div>
-                <div className="my-1 flex flex-col items-start">
-                    <label className="text-lg mr-2" htmlFor="email">Repite tu email<span className="text-red-500">*</span></label>
-                    <input required
-                        value={emailValid}
-                        onChange={(e)=>setEmailValid(e.target.value)}
-                        className="border-2 rounded px-4" 
-                        type="email"  
-                        placeholder="Repite tu email"/>
-                </div>
-                <div className="my-1 flex flex-col items-start">
-                    <label className="text-lg mr-2" htmlFor="email">Número de teléfono<span className="text-red-500">*</span></label>
-                    <input required
-                        value={phone}
-                        onChange={(e)=>setPhone(e.target.value)}
-                        className="border-2 rounded px-4" 
-                        type="tel" 
-                        placeholder="Número de teléfono"/>
-                </div>
-                <div className="flex py-8">
-                    <Link to="/cart">
-                        <button className="border-2 border-black px-5 py-2 rounded hover:bg-black hover:text-white mr-2 shadow"> ← Atrás</button>
-                    </Link>
-                    <button 
-                        type="submit"
-                        onClick={() => setShowModal(true)}
-                        className="border-2 border-black px-5 py-2 rounded bg-black text-white hover:bg-white hover:text-black ml-2 shadow">Confirmar compra</button>
-                </div>
-            </form>
+            <Form
+                generarOrden={generarOrden}
+                name={name}
+                setName={setName}
+                phone={phone}
+                setPhone={setPhone}
+                email={email}
+                setEmail={setEmail}
+                emailValid={emailValid}
+                setEmailValid={setEmailValid}
+                notValid={notValid}
+                setShowModal={setShowModal}/>
 
             <Modal
-            showModal={showModal}
-            setShowModal={setShowModal}
-            generarOrden={generarOrden}/>
-    
+                orderID={orderID}
+                showModal={showModal}
+                setShowModal={setShowModal}
+                generarOrden={generarOrden}/>
         </div>
     )
 }

@@ -3,7 +3,9 @@ import Item from '../Item/Item'
 
  const ItemList = memo ( ({productos}) => {
     return (
-        productos.map(prod => <Item prod={prod} key={prod.id}/>)
+        <div className="item-list">
+            {productos.map(prod => <Item prod={prod} key={prod.id}/>)}
+        </div>
         )
 }
 )
