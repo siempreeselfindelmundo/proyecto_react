@@ -12,7 +12,7 @@ function Item({prod}) {
                         <h2 className="text-2xl">{prod.title}</h2>
                         <p className="text-xl mb-4">{prod.price}€</p>
                         <Link to={`/details/${prod.id}`}>
-                            <button className="btn-primary">Más detalles</button>
+                            <div className="btn-primary">Más detalles</div>
                         </Link>
                     </div>
                 </div>

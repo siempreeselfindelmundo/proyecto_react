@@ -10,6 +10,15 @@
     @apply py-2 px-4 bg-white text-black border border-black rounded text-lg hover:bg-black hover:text-white transition ease-in-out flex items-center transform hover:-translate-y-0.5 shadow
 }
 
+.btn-primary-detail {
+    @apply py-1 px-2 mb-4 bg-black text-white border border-black rounded text-lg hover:bg-white hover:text-black transition ease-in-out flex items-center transform hover:-translate-y-0.5 shadow
+}
+
+.btn-secondary-detail {
+    @apply py-1 px-2 mb-4 bg-white text-black border border-black rounded text-lg hover:bg-black hover:text-white transition ease-in-out flex items-center transform hover:-translate-y-0.5 shadow
+}
+
+
 .btn-delete {
     @apply bg-red-700 text-white p-2 rounded mx-6
 }
@@ -59,7 +68,7 @@
 }
 
 .item-detail-container{
-    @apply flex flex-col justify-center items-center pt-6 pb-12 lg:flex lg:flex-row
+    @apply flex flex-col justify-center items-center pt-6 pb-6 lg:flex lg:flex-row
 }
 
 .item-detail-container-text{
@@ -67,11 +76,11 @@
 }
 
 .details-text{
-    @apply flex flex-col items-start py-4 text-gray-600
+    @apply flex flex-col items-start py-2 text-gray-600
 }
 
 .cart-item-container {
-    @apply flex justify-center items-center py-4 px-2
+    @apply flex flex-col justify-center items-center py-4 px-2 lg:flex lg:flex-row lg:justify-center lg:items-center
 }
 
 .checkout-container {
@@ -99,7 +108,7 @@
 }
 
 .footer-container {
-    @apply flex justify-center bg-black text-white font-extralight text-xs py-3
+    @apply flex justify-center bg-black text-white font-extralight text-xs py-3 mt-10
 }
 
 .modal-container {

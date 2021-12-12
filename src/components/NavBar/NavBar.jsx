@@ -14,7 +14,7 @@ const NavBar = ({toggle}) => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </div>
-                <Link to="/" index className="main-title">
+                <Link to="/" className="main-title">
                     A.M. Florist
                 </Link>
                 <nav className="nav">

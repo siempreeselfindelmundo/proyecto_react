@@ -4,9 +4,6 @@ import { getFirestore } from '../../services/getFirestore'
 import ItemList from '../ItemList/ItemList'
 import Spinner from '../Spinner/Spinner'
 
-
-
-
 function ItemListContainer({ greetings }) {
     const [productos, setProductos] = useState([])
     const [loading, setLoading] = useState(true)
@@ -20,18 +17,14 @@ function ItemListContainer({ greetings }) {
         .then(data => setProductos( data.docs.map( items => ( { id: items.id , ...items.data() } ) ) ))
         .catch(err => console.log(err))
         .finally(() => setLoading(false))
-    
        
     }, [categoryId])
-
-    
 
     return (
         <div className="item-list-container">
             <h1 className="title">Postales</h1>
             <p className="p-8">{greetings}</p>
             {loading ? 
-            
             <Spinner/>
             :   
             <ItemList productos={productos} />  
