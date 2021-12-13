@@ -24,6 +24,7 @@ Esta app de React utiliza las siguientes dependencias:
 
 - [ReactJS](https://es.reactjs.org/) ^17.0.2 - Librería principal del proyecto.
 - [React Router DOM](https://reactrouter.com/docs/en/v6/getting-started/overview) ^6.0.1 - Navegación de la App.
+- [React Helmet](https://github.com/nfl/react-helmet) ^1.2.2 - Título de la App.
 - [Firebase](https://firebase.google.com/) ^8.9.1 - Base de datos.
 - [TailwindCSS](https://tailwindcss.com/) ^2.2.17 - Maquetación y estilos.
 - [CRACO](https://tailwindcss.com/docs/guides/create-react-app) ^6.4.2 - Dependencia de Tailwind para trabajar con ReactJS.
